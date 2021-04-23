@@ -22,7 +22,7 @@ object task4 extends App {
 
     def contains[B >: A](newValue: B)(implicit ordering: Ordering[B]): Boolean =
       this match {
-        case Branch(value, _, _) if ordering.eq(value, newValue) => true
+        case Branch(value, _, _) if ordering.compare(value, newValue) == 0 => true
         case Branch(value, left, _) if ordering.lt(newValue, value) => left.contains(newValue)
         case Branch(_, _, right) => right.contains(newValue)
         case Leaf => false
